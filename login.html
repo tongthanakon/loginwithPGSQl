@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PROJECT</title>
+  </head>
+
+  <body>
+    <div class="form-group">
+      <input
+        id="input_user"
+        type="user"
+        name="user"
+        class="form-control form-control-user"
+        placeholder="User"
+      />
+    </div>
+    <div class="form-group">
+      <input
+        id="input_pw"
+        type="password"
+        name="password"
+        class="form-control form-control-user"
+        placeholder="Password"
+      />
+    </div>
+    <div class="form-group"></div>
+    <button
+      id="btn_login"
+      type="submit"
+      class="btn btn-primary btn-user btn-block"
+      name="login_user"
+    >
+      Login
+    </button>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+    <script>
+        // A $( document ).ready() block.
+        $(document).ready(function () {
+          console.log("ready!");
+  
+          $("#btn_login").click(function () {
+            var username = $("#input_user")[0].value;
+            var pw = $("#input_pw")[0].value;
+            var form = new FormData();
+            form.append("username", username);
+            form.append("password", pw);
+            var settings = {
+              url: "http://localhost/LoginDB/loginwithPGSQl/login.php",
+              method: "POST",
+              timeout: 0,
+              async: false,
+              processData: false,
+              mimeType: "multipart/form-data",
+              contentType: false,
+              data: form,
+            };
+  
+            $.ajax(settings).done(function (response) {
+              console.log(response, typeof response);
+              if(response=="true"){
+                  alert("welcome to main page")
+                  window.location = 'http://www.google.com';
+  
+              }else{
+                  alert("some thing wrong please check you password")
+  
+              }
+            });
+          });
+        });
+      </script>
+  </body>
+</html>
