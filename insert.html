@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PROJECT</title>
+
+    <style>
+      body,
+      html {
+        height: 100%;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      /* Add styles to the form container */
+      .container {
+        right: 0;
+        margin: 20px;
+        max-width: 300px;
+        padding: 16px;
+        background-color: white;
+      }
+
+      /* Full-width input fields */
+      input[type="text"],
+      input[type="password"] {
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        border: none;
+        background: #f1f1f1;
+      }
+
+      input[type="text"]:focus,
+      input[type="password"]:focus {
+        background-color: #ddd;
+        outline: none;
+      }
+
+      /* Set a style for the submit button */
+      .btn {
+        background-color: blueviolet;
+        color: white;
+        padding: 16px 20px;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        opacity: 0.9;
+      }
+
+      .btn:hover {
+        opacity: 1;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div  class="container">
+      <div>
+        <input
+          id="input_user"
+          type="text"
+          name="user"
+          placeholder="User name"
+        />
+      </div>
+      <div>
+        <input
+          id="input_pw"
+          type="password"
+          name="password"
+          placeholder="Password"
+        />
+      </div>
+      <button
+        id="btn_register"
+        type="submit"
+        class="btn"
+        name="Register"
+      >
+        Register
+      </button>
+      
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.js"
+      integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      $("#btn_register").click(function () {
+        var username = $("#input_user")[0].value;
+        var pw = $("#input_pw")[0].value;
+        var form = new FormData();
+        if(username==""){
+          window.location ="http://localhost/LoginDB/loginwithPGSQl-1/insert.html";
+          alert("usernam is empty")
+        }
+        if(pw==""){
+          window.location ="http://localhost/LoginDB/loginwithPGSQl-1/insert.html";
+          alert("password is empty")
+        }
+        else{
+        form.append("username", username);
+        form.append("password", pw);
+        var settings = {
+          url: "http://localhost/LoginDB/loginwithPGSQl-1/insert.php",
+          method: "POST",
+          timeout: 0,
+          processData: false,
+          mimeType: "multipart/form-data",
+          contentType: false,
+          data: form,
+        };
+
+        $.ajax(settings).done(function (response) {
+          console.log(response);
+          alert("welcome to main page");
+          window.location =
+            "http://localhost/LoginDB/loginwithPGSQl-1/login.html";
+        });
+      }
+      });
+    </script>
+  </body>
+</html>
